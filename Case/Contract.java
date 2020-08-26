@@ -14,8 +14,6 @@ public class Contract implements Serializable {
     public Contract() {
     }
 
-    ;
-
     public Contract(String phoneNumber, int id, String name, String lop, String address, String dateOfBirth, String emailAdress) {
         this.phoneNumber = phoneNumber;
         this.id = id;
