@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Contract implements Serializable {
     private String phoneNumber;
-    private String groupName;
+    private int id;
     private String name;
     private String lop;
     private String address;
@@ -16,9 +16,9 @@ public class Contract implements Serializable {
 
     ;
 
-    public Contract(String phoneNumber, String groupName, String name, String lop, String address, String dateOfBirth, String emailAdress) {
+    public Contract(String phoneNumber, int id, String name, String lop, String address, String dateOfBirth, String emailAdress) {
         this.phoneNumber = phoneNumber;
-        this.groupName = groupName;
+        this.id = id;
         this.name = name;
         this.lop = lop;
         this.address = address;
@@ -32,12 +32,12 @@ public class Contract implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public int getId() {
+        return id;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -82,7 +82,8 @@ public class Contract implements Serializable {
 
     @Override
     public String toString() {
-        return " Phone: " + getPhoneNumber() + "\n" + " Group: " + getGroupName() + "\n" + " Name: " + getName() + "\n" + " Class: " + getLop() + "\n" + " Address: " + getAddress() + "\n";
+        //return " Phone: " + getPhoneNumber() + "\n" + " ID: " + getId() + "\n" + " Name: " + getName() + "\n" + " Class: " + getLop() + "\n" + " Address: " + getAddress() + "\n";
+        return " ID: " + getId() + "\n" + " Name: " + getName() + "\n" + " Ngày Sinh: " + getDateOfBirth() + "\n" + " Class: " + getLop() + "\n" + " Address: " + getAddress() + "\n" + " Phone: " + getPhoneNumber() + "\n" + " Email: " + getEmailAdress() + "\n";
     }
 
 //    @Override

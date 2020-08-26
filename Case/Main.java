@@ -40,8 +40,8 @@ public class Main {
             System.out.println("3. Cập nhật");
             System.out.println("4. Xóa");
             System.out.println("5. Tìm kiếm");
-            System.out.println("6. Đọc từ file");
-            System.out.println("7. Ghi vào file");
+            System.out.println("6. Ghi vào file");
+            System.out.println("7. Đọc từ file");
             System.out.println("8. Thoát");
             System.out.print("Chọn chức năng: ");
             choice = sc.nextInt();
@@ -73,16 +73,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String phoneNumber = "";
         String emailAddress = "";
-        System.out.println("Thông tin của danh sách: ");
-        do {
-            System.out.print("- Số điện thoại: ");
-            phoneNumber = sc.nextLine();
-            if (!validPhone(phoneNumber)) {
-                System.out.println("\nSố điện thoại không khả dụng. Vui lòng nhập lại");
-            }
-        } while (!validPhone(phoneNumber));
-        System.out.print("\n- Nhóm của hs: ");
-        String groupName = sc.nextLine();
+        System.out.println("Nhập vào thông tin: ");
+        System.out.print("\n- ID của hs: ");
+        int id = Integer.parseInt(sc.nextLine());
         System.out.print("\n- Họ tên: ");
         String name = sc.nextLine();
         System.out.print("\n- Lớp: ");
@@ -92,24 +85,31 @@ public class Main {
         System.out.print("\n- Ngày sinh: ");
         String dateOfBirth = sc.nextLine();
         do {
+            System.out.print("\n - Số điện thoại: ");
+            phoneNumber = sc.nextLine();
+            if (!validPhone(phoneNumber)) {
+                System.out.println("\nSố điện thoại không khả dụng. Vui lòng nhập lại");
+            }
+        } while (!validPhone(phoneNumber));
+        do {
             System.out.print("\n- Email: ");
             emailAddress = sc.nextLine();
             if (!validEmail(emailAddress)) {
                 System.out.println("\nEmail không khả dụng. Vui lòng nhập lại: ");
             }
         } while (!validEmail(emailAddress));
-        Contract contract = new Contract(phoneNumber, groupName, name, lop, address, dateOfBirth, emailAddress);
+        Contract contract = new Contract(phoneNumber, id, name, lop, address, dateOfBirth, emailAddress);
         contractList.add(contract);
         System.out.println("Thêm thành công");
     }
 
     public static void search() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập tên của học sinh cần tìm: ");
-        String searchName = sc.nextLine();
+        System.out.println("Nhập ID của học sinh cần tìm: ");
+        int searchId = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < contractList.size(); i++) {
             Contract c = contractList.get(i);
-            if (searchName.equals(c.getName())) {
+            if (searchId == c.getId()) {
                 System.out.println(contractList.get(i));
                 break;
             }
@@ -118,13 +118,14 @@ public class Main {
 
     public static void update() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập tên học sinh cần sửa: ");
-        String searchPhone = sc.nextLine();
+        System.out.println("Nhập ID học sinh cần sửa: ");
+        int searchId = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < contractList.size(); i++) {
-            if (searchPhone.equals(contractList.get(i).getName())) {
-                System.out.print("Nhóm của danh bạ mới: ");
-                String newGroup = sc.nextLine();
-                contractList.get(i).setGroupName(newGroup);
+         //   if (searchPhone.equals(contractList.get(i).getName())) {
+            if (searchId == contractList.get(i).getId()){
+                System.out.print("Id mới: ");
+                int newId = Integer.parseInt(sc.nextLine());
+                contractList.get(i).setId(newId);
                 System.out.print("\nHọ tên: ");
                 String newName = sc.nextLine();
                 contractList.get(i).setName(newName);
@@ -149,15 +150,16 @@ public class Main {
 
     public static void delete() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập tên học sinh cần xóa: ");
-        String searchName = sc.nextLine();
+        System.out.println("Nhập ID học sinh cần xóa: ");
+        int searchId = Integer.parseInt(sc.nextLine());
         for (int i = 0; i < contractList.size(); i++) {
-            if (searchName.equals(contractList.get(i).getName())) {
-                System.out.println("Bạn có chắc muốn xóa không? Nhập Y(Yes) hoặc N(No)");
+           // if (searchName.equals(contractList.get(i).getName())) {
+            if (searchId == contractList.get(i).getId()){
+                System.out.println("Bạn có chắc muốn xóa " + contractList.get(i).getName() + " không? Nhập Y(Yes) hoặc N(No)");
                 String choice = sc.nextLine();
                 if (choice.equals("Y")) {
                     contractList.remove(i);
-                    System.out.println("Xóa thành công học sinh");
+                    System.out.println("Xóa thành công học sinh khỉ danh sách");
                     break;
                 } else if (choice.equals("N")) {
                     break;
