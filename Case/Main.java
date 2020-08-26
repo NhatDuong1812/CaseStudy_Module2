@@ -1,6 +1,6 @@
 package Case;
 
-import Case.Contract;
+
 
 import  java.io.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class Main {
     static List<Contract> contractList = new ArrayList<>();
-    static Contract contract = new Contract();
+    //static Contract contract = new Contract();
     private static Pattern pattern;
     private static Matcher matcher;
     private static final String EMAIL_REGEX = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
@@ -40,26 +40,38 @@ public class Main {
             System.out.println("3. Cập nhật");
             System.out.println("4. Xóa");
             System.out.println("5. Tìm kiếm");
-            System.out.println("6. Ghi vào file");
-            System.out.println("7. Đọc từ file");
+            System.out.println("6. Đọc từ file");
+            System.out.println("7. Ghi vào file");
             System.out.println("8. Thoát");
             System.out.print("Chọn chức năng: ");
             choice = sc.nextInt();
 
             switch (choice) {
-                case 1 -> show();
-                case 2 -> add();
-                case 3 -> update();
-                case 4 -> delete();
-                case 5 -> search();
-                case 6 -> readFile();
-                case 7 -> writeFile();
-                default -> System.out.println("Lỗi. Mời nhập lại");
+                case 1:
+                    show();
+                    break;
+                case 2:
+                    add();
+                    break;
+                case 3:
+                    update();
+                    break;
+                case 4:
+                    delete();
+                    break;
+                case 5:
+                    search();
+                    break;
+                case 6:
+                    readFile();
+                    break;
+                case 7:
+                    writeFile();
+                    break;
+                default :
+                    System.out.println("lỗi mời nhập lại");
             }
-
-
         } while (choice != 8);
-
     }
 
     public static void show() {
@@ -85,7 +97,7 @@ public class Main {
         System.out.print("\n- Ngày sinh: ");
         String dateOfBirth = sc.nextLine();
         do {
-            System.out.print("\n - Số điện thoại: ");
+            System.out.print("\n- Số điện thoại: ");
             phoneNumber = sc.nextLine();
             if (!validPhone(phoneNumber)) {
                 System.out.println("\nSố điện thoại không khả dụng. Vui lòng nhập lại");
@@ -152,7 +164,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập ID học sinh cần xóa: ");
         int searchId = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < contractList.size(); i++) {
+        for (int i = 1; i < contractList.size(); i++) {
            // if (searchName.equals(contractList.get(i).getName())) {
             if (searchId == contractList.get(i).getId()){
                 System.out.println("Bạn có chắc muốn xóa " + contractList.get(i).getName() + " không? Nhập Y(Yes) hoặc N(No)");
@@ -172,9 +184,9 @@ public class Main {
     }
 
     public static void writeFile() throws IOException {
-        FileWriter writer = new FileWriter("src/contract.csv");
+        FileWriter writer = new FileWriter("contract.csv");
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
-        bufferedWriter.write(contract.toString());
+        //bufferedWriter.write(contract.toString());
         bufferedWriter.write(contractList.toString());
         bufferedWriter.close();
         System.out.println("Thêm thành công");
@@ -182,7 +194,7 @@ public class Main {
 
 
     public static void readFile() throws IOException{
-        FileReader frr = new FileReader("src/contract.csv");
+        FileReader frr = new FileReader("contract.csv");
         BufferedReader br = new BufferedReader(frr);
         String text;
         while ((text = br.readLine()) != null){
